@@ -1,0 +1,4 @@
+Jag kommer använda vanliga text filer och inge csv grejer. Tycker jag kan kontrollera saker bättre då.
+
+Programmet kommer att ha en stor loop som körs hela tiden som i ett spel. förutom att den kommer att kräva input
+varje gång användaren vill gå vidare till nästa "tick" av loopen.
