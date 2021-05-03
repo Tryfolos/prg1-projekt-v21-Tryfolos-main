@@ -1,5 +1,5 @@
 #Importing things.
-import OS
+import os
 
 
 
@@ -7,6 +7,6 @@ import OS
 running = 1
 
 #Main program loop.
-while running = 1:
+while running == 1:
     pass
 
