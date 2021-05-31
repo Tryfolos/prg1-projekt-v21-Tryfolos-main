@@ -1,6 +1,7 @@
 #Importing things.
 import os
 import keyboard
+import copy
 
 #Primitive Variables and lists.
 running = 1 #1 means the program is running and 0 means the program will shut down.
@@ -77,6 +78,7 @@ while running == 1:
             print("Dorothy Miller 2010")
             print("Bella Nelson 2000")
             print("- - - - - - - - - - - - - - - - - - - -")
+            print("")
             print(cm)
             thing = 0
         if input_space == 1:
@@ -121,23 +123,31 @@ while running == 1:
         #Removing unused/empty elements from temp_list.
         temp_list = filter(None, temp_list)
 
+        #Making a deep copy of the temp list because for some reason it fixes a problem. This is the result of shotgun debugging. Don not ask.
+        temp_list_2 = copy.deepcopy(temp_list)
+
+
+        #Using temp_list to generate usernames and putting them in username_list.
+        for f in temp_list:
+            temp_string = copy.deepcopy(f[0]) + "_" + copy.deepcopy(f[1])
+            username_list.append(temp_string)
+
 
 
         #Using temp_list to generate passwords and putting them in password_list.
-        for f in temp_list:
-            password_list.append(f[0][0:2]+f[1][0:2]+f[2])
+        for f in temp_list_2:
+            temp_string = copy.deepcopy(f[0][0:2]) + copy.deepcopy(f[1][0:2]) + copy.deepcopy(f[2])
+            password_list.append(temp_string)
 
-
-
-
-        #Devtest.
-        for f in password_list:
-            print(f)
 
 
         #Printing list of usernames and passwords.
         print("- - - - - - - - - - - - - - - - - - - -")
-        print(" ")
+        print("-Username- -Password-")
+        print("")
+        #Printing full list of usernames and passwords in for loop.
+        for f in range(0, len(username_list)):
+            print(username_list[f] + " " + password_list[f])
         print("- - - - - - - - - - - - - - - - - - - -")
         break
 
