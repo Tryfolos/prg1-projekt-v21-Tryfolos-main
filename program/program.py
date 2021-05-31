@@ -2,7 +2,7 @@
 import os
 import sys
 import time
-import pygame
+import keyboard
 
 #Primitive Variables and lists.
 running = 1 #1 means the program is running and 0 means the program will shut down.
@@ -13,12 +13,6 @@ thing = 1 #Used for all sorts of random things.
 filename = "" #This is the name of the file to be read.
 read_list = [[]] #2d list that contains data from file that is read.
 
-
-#Initilizing pygame. The only part of pygame that will be used is keyboard input.
-pygame.init()
-
-#Creating a pygame window. This is neccesary for input to work. This will not be used for anything else.
-window = pygame.display.set_mode((60, 50))
 
 
 #Clearing the terminal since it looks like shit.
@@ -33,12 +27,10 @@ while running == 1:
     #Resetting input each tick of the frame.
     input_space = 0
 
-    #Taking input from pygame.
-    for f in pygame.event.get():
-        if f.type == pygame.KEYDOWN:
-            if f.key == pygame.K_SPACE:
-                input_space = 1
-
+    #Taking input from keyboard.
+    if keyboard.is_pressed("space"):
+        input_space = 1
+    sys.stdout.flush()
 
 
     #This is the mandatory and unskippable welcomeing/startup sequence.
@@ -92,9 +84,11 @@ while running == 1:
     #Enter name of text file.
     if current_status == "enter_file_name":
         if thing == 1:
+            for f in range(0, 50):
+                keyboard.press_and_release("backspace")
             os.system("cls")
             print("Enter the name of the text file you would like to use:")
-            filename = input()
+            filename = input("")
             thing = 0
         if input_space == 1:
             input_space = 0
@@ -107,15 +101,9 @@ while running == 1:
         os.system("cls")
         print("Processing...")
         file = open(filename, "r")
-        file.read()
+        read_list = file.readlines()
+        time.sleep(2)
 
 
-
-
-
-
-
-    #Updating the graphical pygame window. This is kind of useless but whatever.
-    pygame.display.flip()
 
 
