@@ -4,6 +4,7 @@ import keyboard
 import copy
 import random
 
+
 #Primitive Variables and lists.
 running = 1 #1 means the program is running and 0 means the program will shut down.
 current_status = "welcome" #This describes what part of the program will run in the big while loop below.
@@ -13,6 +14,7 @@ thing = 1 #Used for all sorts of random things.
 filename = "" #This is the name of the file to be read.
 read_list = [] #list that contains data from file that is read.
 temp_list = [] #List used temporarily to generate usernames and passwords. It will contain firstnames, lastnames, and birthyears as three seperate elements in their own lists.
+space = 0 #If this is 0. You can't enter another space.
 
 #Adding many lists into temp_list.
 for f in range(0, 200):
@@ -33,9 +35,19 @@ while running == 1:
     #Resetting input each tick of the frame.
     input_space = 0
 
+
+
     #Taking input from keyboard.
     if keyboard.is_pressed("space"):
-        input_space = 1
+        if space == 1:
+            input_space = 1
+            space = 0
+
+    #Reclaiming the ability to input space as soon as the space key is stopped being pressed.
+    if not keyboard.is_pressed("space"):
+        space = 1
+
+
 
 
     #This is the mandatory and unskippable welcomeing/startup sequence.
@@ -152,7 +164,7 @@ while running == 1:
         print("")
         #Printing full list of usernames and passwords in for loop.
         for f in range(0, len(username_list)):
-            print(username_list[f] + " " + password_list[f])
+            print(username_list[f][0:-1] + " " + password_list[f][0:-1])
         print("- - - - - - - - - - - - - - - - - - - -")
 
 
@@ -165,10 +177,23 @@ while running == 1:
             file.write(password_list[f])
 
         file.close()
+        current_status = "final"
+        thing = 1
 
 
         #Ending the program.
-        break
+    if current_status == "final":
+        if thing == 1:
+            print("")
+            print("Press space to exit:")
+            thing = 0
+            input_space = 0
+        if input_space == 1:
+            running = 0
+
+
+
+
 
 
 
