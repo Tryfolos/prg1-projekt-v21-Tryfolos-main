@@ -2,6 +2,7 @@
 import os
 import keyboard
 import copy
+import random
 
 #Primitive Variables and lists.
 running = 1 #1 means the program is running and 0 means the program will shut down.
@@ -108,11 +109,15 @@ while running == 1:
     if current_status == "processing":
         os.system("cls")
         print("Usernames and passwords has been generated!\n")
+        print("")
+        print("The new usernames and passwords will be saved in a text file inside the current working directory.")
+        print("")
 
         #Creating list of usernames and passwords.
         #Creating file object from file and reading it. The read data is put into a list.
         file = open(filename, "r")
         read_list = file.readlines()
+        file.close()
 
         #Iterating read_list and generating a new 2d array containing firstnames lastnames and birthyears as seperate elements.
         numb = 0
@@ -129,14 +134,14 @@ while running == 1:
 
         #Using temp_list to generate usernames and putting them in username_list.
         for f in temp_list:
-            temp_string = copy.deepcopy(f[0]) + "_" + copy.deepcopy(f[1])
+            temp_string = copy.deepcopy(f[0]) + "_" + copy.deepcopy(f[1]) + str(random.randint(10, 99))
             username_list.append(temp_string)
 
 
 
         #Using temp_list to generate passwords and putting them in password_list.
         for f in temp_list_2:
-            temp_string = copy.deepcopy(f[0][0:2]) + copy.deepcopy(f[1][0:2]) + copy.deepcopy(f[2])
+            temp_string = copy.deepcopy(f[0][0:2]) + copy.deepcopy(f[1][0:2]) + random.choice(["#", "%", "&", "@", "!", "?"]) + copy.deepcopy(f[2])
             password_list.append(temp_string)
 
 
@@ -149,8 +154,21 @@ while running == 1:
         for f in range(0, len(username_list)):
             print(username_list[f] + " " + password_list[f])
         print("- - - - - - - - - - - - - - - - - - - -")
-        break
 
+
+        #Saving username and password lists in text file.
+        file = open(filename[0:-4]+"_final.txt", "w+")
+
+        for f in range(0, len(username_list)):
+            file.write(username_list[f])
+            file.write(" ")
+            file.write(password_list[f])
+
+        file.close()
+
+
+        #Ending the program.
+        break
 
 
 
