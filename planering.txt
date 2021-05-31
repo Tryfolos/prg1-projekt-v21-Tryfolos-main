@@ -2,3 +2,7 @@ Jag kommer använda vanliga text filer och inge csv grejer. Tycker jag kan kontr
 
 Programmet kommer att ha en stor loop som körs hela tiden som i ett spel. förutom att den kommer att kräva input
 varje gång användaren vill gå vidare till nästa "tick" av loopen.
+
+När användaren har anget ett filnamn kommer den filen läsas av och datan kommer sättas i en lista som sedan kommer kombineras 
+för att skapa en ny lista som innehåller användarnamn och lösenord. De här användarna och lösenorden kommer
+sedan att läggas in i en nu textfil.
