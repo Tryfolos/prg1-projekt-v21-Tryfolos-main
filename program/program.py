@@ -16,7 +16,8 @@ temp_list = [] #List used temporarily to generate usernames and passwords. It wi
 for f in range(0, 200):
     temp_list.append([])
 
-final_list = [] #list that contains the final generated usernames and passwords.
+username_list = [] #list that contains the final generated usernames.
+password_list = [] #List that contains the final generated passwords.
 
 #Clearing the terminal since it looks like shit.
 os.system("cls")
@@ -122,14 +123,15 @@ while running == 1:
 
 
 
-        #Using temp_list to generate usernames and passwords and putting them in final_list.
-        #for f in temp_list:
+        #Using temp_list to generate passwords and putting them in password_list.
+        for f in temp_list:
+            password_list.append(f[0][0:2]+f[1][0:2]+f[2])
 
 
 
 
         #Devtest.
-        for f in temp_list:
+        for f in password_list:
             print(f)
 
 
