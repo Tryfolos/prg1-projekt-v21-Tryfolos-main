@@ -1,7 +1,5 @@
 #Importing things.
 import os
-import sys
-import time
 import keyboard
 
 #Primitive Variables and lists.
@@ -11,9 +9,14 @@ cm = "Press space to continue: " #This is used to tell the user to press spaceba
 input_space = 0 #1 means the spacebar has just been pressed.
 thing = 1 #Used for all sorts of random things.
 filename = "" #This is the name of the file to be read.
-read_list = [[]] #2d list that contains data from file that is read.
+read_list = [] #list that contains data from file that is read.
+temp_list = [] #List used temporarily to generate usernames and passwords. It will contain firstnames, lastnames, and birthyears as three seperate elements in their own lists.
 
+#Adding many lists into temp_list.
+for f in range(0, 200):
+    temp_list.append([])
 
+final_list = [] #list that contains the final generated usernames and passwords.
 
 #Clearing the terminal since it looks like shit.
 os.system("cls")
@@ -30,7 +33,6 @@ while running == 1:
     #Taking input from keyboard.
     if keyboard.is_pressed("space"):
         input_space = 1
-    sys.stdout.flush()
 
 
     #This is the mandatory and unskippable welcomeing/startup sequence.
@@ -81,28 +83,62 @@ while running == 1:
             thing = 1
             current_status = "enter_file_name"
 
+
     #Enter name of text file.
     if current_status == "enter_file_name":
         if thing == 1:
-            for f in range(0, 50):
+            for f in range(0, 50): #This for loop is here to put a bunch of backspaces into the input functions buffer in order to make sure it is empty.
                 keyboard.press_and_release("backspace")
             os.system("cls")
             print("Enter the name of the text file you would like to use:")
             filename = input("")
+            print(cm)
             thing = 0
         if input_space == 1:
             input_space = 0
             thing = 1
             current_status = "processing"
 
+
     #Reading the text file and making list of usernames and passwords.
-    #Then creating new file and writing list of usernames and passowords to it.
+    #Then creating new file and writing list of usernames and passwords to it.
     if current_status == "processing":
         os.system("cls")
-        print("Processing...")
+        print("Usernames and passwords has been generated!\n")
+
+        #Creating list of usernames and passwords.
+        #Creating file object from file and reading it. The read data is put into a list.
         file = open(filename, "r")
         read_list = file.readlines()
-        time.sleep(2)
+
+        #Iterating read_list and generating a new 2d array containing firstnames lastnames and birthyears as seperate elements.
+        numb = 0
+        for f in read_list:
+            temp_list[numb] = f.split(" ")
+            numb += 1
+
+        #Removing unused/empty elements from temp_list.
+        temp_list = filter(None, temp_list)
+
+
+
+        #Using temp_list to generate usernames and passwords and putting them in final_list.
+        #for f in temp_list:
+
+
+
+
+        #Devtest.
+        for f in temp_list:
+            print(f)
+
+
+        #Printing list of usernames and passwords.
+        print("- - - - - - - - - - - - - - - - - - - -")
+        print(" ")
+        print("- - - - - - - - - - - - - - - - - - - -")
+        break
+
 
 
 
