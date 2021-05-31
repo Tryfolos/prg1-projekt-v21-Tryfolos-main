@@ -1,9 +1,11 @@
+##### WARNING: EXECUTABLE VERSION DOES NOT WORK AS EXPECTED #####
+
 #Importing things.
 import os
 import keyboard
 import copy
 import random
-
+import time
 
 #Primitive Variables and lists.
 running = 1 #1 means the program is running and 0 means the program will shut down.
@@ -90,6 +92,7 @@ while running == 1:
             print("Michael Smith 1960")
             print("Dorothy Miller 2010")
             print("Bella Nelson 2000")
+            print("Gunnar Svensson 1991")
             print("- - - - - - - - - - - - - - - - - - - -")
             print("")
             print(cm)
@@ -179,7 +182,7 @@ while running == 1:
         file.close()
         current_status = "final"
         thing = 1
-
+        input_space = 0
 
         #Ending the program.
     if current_status == "final":
@@ -187,9 +190,29 @@ while running == 1:
             print("")
             print("Press space to exit:")
             thing = 0
-            input_space = 0
-        if input_space == 1:
             running = 0
+
+
+
+running = 1
+while running == 1:
+
+    # Resetting input each tick of the frame.
+    input_space = 0
+
+    # Taking input from keyboard.
+    if keyboard.is_pressed("space"):
+        if space == 1:
+            input_space = 1
+            space = 0
+
+    # Reclaiming the ability to input space as soon as the space key is stopped being pressed.
+    if not keyboard.is_pressed("space"):
+        space = 1
+
+
+    if input_space == 1:
+        running = 0
 
 
 
